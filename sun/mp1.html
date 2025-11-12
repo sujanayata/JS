@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Color Generator</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #ffffff;
+      transition: background-color 0.4s ease;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #colorCode {
+      font-size: 1.5rem;
+      margin: 15px;
+      font-weight: bold;
+      color: #222;
+      background: rgba(255,255,255,0.8);
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Color Generator</h1>
+  <div id="colorCode">#ffffff</div>
+  <button id="btn">Change Color</button>
+
+  <script>
+    const btn = document.getElementById("btn");
+    const colorCode = document.getElementById("colorCode");
+
+    btn.addEventListener("click", () => {
+      const randomColor = getRandomColor();
+      document.body.style.backgroundColor = randomColor;
+      colorCode.textContent = randomColor;
+    });
+
+    function getRandomColor() {
+      const letters = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+  </script>
+</body>
+</html>
