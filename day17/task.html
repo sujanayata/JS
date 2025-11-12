@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom</title>
+</head>
+<body>
+    
+    <h1 class="first">Never Give Up</h1>
+
+    <p class="second">Work hard, be brave.</p>
+    <p class="second">If you fell down yesterday, stand up today.</p>
+    <p class="second">So many books, so little time</p>
+    <button onclick="fun()">click here</button>
+
+    <h2 id="title">bittu</h2>
+    <button onclick="font()">click</button>
+
+    <p class="all">Goa</p>
+    <p class="all">Paris</p>
+    <p class="all">Kerala</p>
+    <button onclick="add()">place</button>
+
+    <p class="box">suppu</p>
+    <p class="box">suppu</p>
+
+
+    <h3 id="bro">Annaya</h3>
+
+
+    <input type="text" id="nameinput">
+
+
+    <script>
+        var greet=document.querySelector(".first")
+        greet.style.color="blue"
+        greet.textContent="Welcome to JavaScript DOM!"
+        
+    function fun(){
+        var a=document.querySelector(".second")
+        a.style.backgroundColor="orange"
+    }
+
+    function font(){
+        var f=document.querySelector("#title");
+        f.style.color="red"
+        f.style.fontSize="30px";
+    }
+
+    // query selector
+
+   function add(){
+     var q=document.querySelectorAll(".all")
+     q.forEach(function(element){
+     element.style.backgroundColor="green";
+   })
+   }
+
+   
+    var b=document.querySelectorAll(".box")
+    b.forEach(function(box){
+    box.style.border="2px solid black"
+
+    })
+   
+
+    var s = document.getElementById("bro");
+    s.setAttribute("class", "highlight");
+    s.setAttribute("style","color:blue")
+
+    var input=document.getElementById("nameinput");
+    input.setAttribute("placeholder","Enter your name")
+
+
+
+    </script>
+
+</body>
+</html>

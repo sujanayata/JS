@@ -6,75 +6,54 @@
     <title>Dom</title>
 </head>
 <body>
-    
-    <h1 class="first">Never Give Up</h1>
 
-    <p class="second">Work hard, be brave.</p>
-    <p class="second">If you fell down yesterday, stand up today.</p>
-    <p class="second">So many books, so little time</p>
-    <button onclick="fun()">click here</button>
-
-    <h2 id="title">bittu</h2>
-    <button onclick="font()">click</button>
-
-    <p class="all">Goa</p>
-    <p class="all">Paris</p>
-    <p class="all">Kerala</p>
-    <button onclick="add()">place</button>
-
-    <p class="box">suppu</p>
-    <p class="box">suppu</p>
-
-
-    <h3 id="bro">Annaya</h3>
-
+    <div id="sis">Akka</div>
 
     <input type="text" id="nameinput">
 
+    <img src="puppy2.webp" id="img">
+
+    <a id="mylink" href="https://www.10000coders.in/">Go to 10kcoders</a>
+    
+
+    <button id="button" disabled>click here</button>
+
+
+    <img id="myimg" src="father-and-daughter.jpg" width="350px" border=100 >
 
     <script>
-        var greet=document.querySelector(".first")
-        greet.style.color="blue"
-        greet.textContent="Welcome to JavaScript DOM!"
-        
-    function fun(){
-        var a=document.querySelector(".second")
+        /*var a=document.getElementById("sis")
+        a.setAttribute("class","life")
         a.style.backgroundColor="orange"
-    }
+        a.style.fontSize="30px"
+        a.style.fontFamily="courier New"
 
-    function font(){
-        var f=document.querySelector("#title");
-        f.style.color="red"
-        f.style.fontSize="30px";
-    }
+        var a=document.getElementById("nameinput")
+        a.setAttribute("placeholder","Enter your name:")
 
-    // query selector
 
-   function add(){
-     var q=document.querySelectorAll(".all")
-     q.forEach(function(element){
-     element.style.backgroundColor="green";
-   })
-   }
+        var ima=document.getElementById("img")
+        var image=ima.getAttribute("src")
+        console.log(image)
 
-   
-    var b=document.querySelectorAll(".box")
-    b.forEach(function(box){
-    box.style.border="2px solid black"
+        var link=document.getElementById("mylink")
+        var url=link.getAttribute("href")
+        console.log(url)
+        */
 
-    })
-   
+        var btn=document.getElementById("button")
+        btn.removeAttribute("disabled")
 
-    var s = document.getElementById("bro");
-    s.setAttribute("class", "highlight");
-    s.setAttribute("style","color:blue")
+        // var border=document.getElementById("myimg")
+        // border.removeAttribute("border")
+        var img=document.getElementById("myimg")
+        img.style.borderLeftColor="blue"
+        img.style.borderRightColor="red"
+        
 
-    var input=document.getElementById("nameinput");
-    input.setAttribute("placeholder","Enter your name")
 
 
 
     </script>
-
 </body>
 </html>

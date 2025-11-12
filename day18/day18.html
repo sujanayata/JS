@@ -3,69 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM</title>
+    <title>Dom</title>
 </head>
 <body>
-    <!-- <p class="para">soumya yata</p>
-    <p class="para">sricharan yata</p>
-    <p class="para">shanmukh</p>
-    <button onclick="fun">click here</button> -->
+    <!-- <p id="food">chicken biryani</p> -->
+    <!-- <img src="puppy2.webp">  -->
+    <!-- <p style="color: red;">suppu</p>
+    <button disabled>click here</button> -->
 
-    <h1 class=>suajana</h1>
-    <h1>soumya</h1>
-    <p>hii </p>
-    <p>good morning</p>
-    <h1>sricharan</h1>
-    <h2 id="dora">never giveup</h2>
-
-
-    <p class="para">hello</p>
-    <p class="para">chitti</p>
-    <button onclick="fun()">click here</button>
-    
-    <p class="box">siri</p>
-    <p class="box">suppu</p>
-    <p class="box">maggie</p>
-
-
-     <p id="para1">Hello World!</p>
-
+    <div id="container">
+       <p class="life">life is unpredictable</p>
+    </div>
     <script>
-        // var a=document.querySelector(".para")
-        // a.style.color="blue"
+        // var fav=document.getElementById("food")
+        // var chi=fav.setAttribute("class","favfood")
+        // var b=document.querySelector(".favfood")
+        // b.style.backgroundColor="orange"
 
-        // var b=document.querySelectorAll(".para")
-        // b.forEach((elements))=>{
-        //     elements.style.color="pink"
-        // }
+        // var image=document.querySelector("img")
+        // var res=image.getAttribute("src")
+        // console.log(res)
 
-        var a= document.querySelector("h1")
-        a.style.color="blue"
+        // var color=document.querySelector("p")
+        // color.removeAttribute("style")
+
+        // var btn=document.querySelector("button")
+        // btn.removeAttribute("disabled")
+
+        // var h=document.createElement("h1")
+        // h.innerHTML="hello"
+        // document.body.appendChild(h)
+
+        // var p=document.getElementById("container")
+        // var c=document.getElementsByClassName("life")[0]
+        // p.removeChild(c)
         
-
-        var b=document.querySelector("p")
-        b.style.backgroundColor="red"
-
-        var c=document.querySelector("#dora")
-        c.style.backgroundColor="green"
-     
-    function fun() {
-    var h = document.querySelectorAll(".para");
-    h.forEach(function(element) {
-        element.style.color = "orange";
-    });
-    }
-
-    let boxes = document.querySelectorAll(".box");
-    boxes.forEach(function(box) {
-    box.style.border = "2px solid black";
-    });
-
-    var p = document.getElementById("para1");
-    p.setAttribute("class", "highlight");
-    p.setAttribute("style","color:red")
-
-  </script>
-
-  </body>
+    </script>
+</body>
 </html>

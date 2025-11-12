@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <!-- <p class="para">soumya yata</p>
+    <p class="para">sricharan yata</p>
+    <p class="para">shanmukh</p>
+    <button onclick="fun">click here</button> -->
+
+    <h1 class=>suajana</h1>
+    <h1>soumya</h1>
+    <p>hii </p>
+    <p>good morning</p>
+    <h1>sricharan</h1>
+    <h2 id="dora">never giveup</h2>
+
+
+    <p class="para">hello</p>
+    <p class="para">chitti</p>
+    <button onclick="fun()">click here</button>
+    
+    <p class="box">siri</p>
+    <p class="box">suppu</p>
+    <p class="box">maggie</p>
+
+
+     <p id="para1">Hello World!</p>
+
+    <script>
+        // var a=document.querySelector(".para")
+        // a.style.color="blue"
+
+        // var b=document.querySelectorAll(".para")
+        // b.forEach((elements))=>{
+        //     elements.style.color="pink"
+        // }
+
+        var a= document.querySelector("h1")
+        a.style.color="blue"
+        
+
+        var b=document.querySelector("p")
+        b.style.backgroundColor="red"
+
+        var c=document.querySelector("#dora")
+        c.style.backgroundColor="green"
+     
+    function fun() {
+    var h = document.querySelectorAll(".para");
+    h.forEach(function(element) {
+        element.style.color = "orange";
+    });
+    }
+
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach(function(box) {
+    box.style.border = "2px solid black";
+    });
+
+    var p = document.getElementById("para1");
+    p.setAttribute("class", "highlight");
+    p.setAttribute("style","color:red")
+
+  </script>
+
+  </body>
+</html>
