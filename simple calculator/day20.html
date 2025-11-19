@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This keyword</title>
+</head>
+<body>
+    <!-- this keyword refers to the current object -->
+     <!-- this keyword in object-> refers to current object -->
+      <!-- this keyword in function-> refers to windows object -->
+       <!-- this keyword is only applicable for current object -->
+    <script>
+
+        /*const person={
+              firstname:"dora",
+              lastname:"bujji",
+              fun_name:function(){
+                console.log(`the first name is: ${this.firstname} and ${this.lastname}`)
+              }
+        }
+        const person1={
+            firstname:"suppu",
+            lastname:"puppy",
+        }
+        person.fun_name()
+        person.fun_name(person1)
+        */
+        
+
+        const emp1={
+               empid:12,
+               empname:"sudri",
+               empsalary:25000,
+               empdetails:function(bonus,gift){
+                    console.log("The total salary along with the bonus is : " , this.empsalary  + bonus, "and the gift they got is :",gift)
+                    return `The employee id:${this.empid}|the employee name :${this.empname}|the employee salary:${this.empsalary}`
+
+               }
+        }
+        const emp2={
+               empid:11,
+               empname:"chutky",
+               empsalary:25000,
+        }
+        const emp3={
+               empid:13,
+               empname:"chitti",
+               empsalary:20000,
+        }
+        // console.log(emp1.empdetails.call(emp2,5000,"cooker"))
+        // console.log(emp1.empdetails(10000,"beer"))
+        // console.log(emp1.empdetails.call(emp3,500,"thumsup"))
+
+        //apply-->
+        
+        // console.log(emp1.empdetails.apply(emp3,[5000,"cooker"]))
+        // console.log(emp1.empdetails.apply(emp2,[5000,"cooker"]))
+        // console.log(emp1.empDetails.apply(emp3, [500, "maza"]))
+
+        // bind
+
+        var res=emp1.empdetails.bind(emp2,5000,"cooker")
+        // console.log(res())
+        console.log(setTimeout(res,3000))
+
+
+
+
+
+    </script>
+</body>
+</html>
