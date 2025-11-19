@@ -6,10 +6,14 @@
     <title>This keyword</title>
 </head>
 <body>
+
+    <p id="para"></p>
     <!-- this keyword refers to the current object -->
-     <!-- this keyword in object-> refers to current object -->
-      <!-- this keyword in function-> refers to windows object -->
-       <!-- this keyword is only applicable for current object -->
+    <!-- this keyword in object-> refers to current object -->
+    <!-- this keyword in function-> refers to windows object -->
+    <!-- this keyword is only applicable for current object -->
+     
+
     <script>
 
         /*const person={
@@ -26,7 +30,6 @@
         person.fun_name()
         person.fun_name(person1)
         */
-        
 
         const emp1={
                empid:12,
@@ -35,7 +38,6 @@
                empdetails:function(bonus,gift){
                     console.log("The total salary along with the bonus is : " , this.empsalary  + bonus, "and the gift they got is :",gift)
                     return `The employee id:${this.empid}|the employee name :${this.empname}|the employee salary:${this.empsalary}`
-
                }
         }
         const emp2={
@@ -48,25 +50,24 @@
                empname:"chitti",
                empsalary:20000,
         }
-        // console.log(emp1.empdetails.call(emp2,5000,"cooker"))
-        // console.log(emp1.empdetails(10000,"beer"))
-        // console.log(emp1.empdetails.call(emp3,500,"thumsup"))
+        console.log(emp1.empdetails())
+        document.getElementById('para').innerHTML=emp1.empdetails()
+        console.log(emp1.empdetails.call(emp2,5000,"cooker"))
+        console.log(emp1.empdetails(10000,"beer"))
+        console.log(emp1.empdetails.call(emp3,500,"thumsup"))
 
         //apply-->
         
-        // console.log(emp1.empdetails.apply(emp3,[5000,"cooker"]))
-        // console.log(emp1.empdetails.apply(emp2,[5000,"cooker"]))
-        // console.log(emp1.empDetails.apply(emp3, [500, "maza"]))
 
-        // bind
+        console.log(emp1.empdetails.apply(emp3,[5000,"cooker"]))
+        console.log(emp1.empdetails.apply(emp2,[5000,"cooker"]))
+        console.log(emp1.empDetails.apply(emp3, [500, "maza"]))
 
+
+        bind
         var res=emp1.empdetails.bind(emp2,5000,"cooker")
-        // console.log(res())
+        console.log(res())
         console.log(setTimeout(res,3000))
-
-
-
-
 
     </script>
 </body>
