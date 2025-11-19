@@ -5,12 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
 </head>
-<body>
-    
-    <h2 id="dora"> wednesday </h2>
-    <button onclick="bujji()">click</button>
+<body onload="loading()">
 
-    
+    <h2 id="dora"> wednesday </h2>
+    <button onclick="bujji()">click</button><br><br>
+
+    <button onmouseover="ms()">Mouseover</button><br> <br>
+
+    <button onmouseout="out()">mouseout</button>  <br> <br>
+
+    <input type="text" onfocus="styling()">  <br> <br>
+
+
+    <form onsubmit="subm()">
+        <input type="text">
+        <button>submit</button>
+    </form>
+    <br><br><br>
+   
+    <input type="text" id="tent">
+
+
+    <select id="sel">
+        <option>hyderabad</option>
+        <option>banglore</option>
+        <option>canada</option>
+    </select>
+
+    <input type="text" class="chec">
 
     <script>
         function bujji(){
@@ -18,7 +40,47 @@
             a.innerHTML="sunday"
             a.style.color="red"
         }
+        function ms(){
+            alert("you move mouse cursor on the button")
+        }
+        function out(){
+            alert("you moved the mouse out of the button")
+        }
+         
+        function styling(){
+            var ip=document.querySelector("input")
+            ip.style.backgroundColor="orange"
+        }
+
+        function subm(){
+            alert("form submitted successfully")
+        }
+        
+        function loading(){
+            alert("page loaded successfully")
+        }
+        
+        var ch=document.querySelector('#tent')
+        ch.onchange=function(){
+            console.log("the add content is:" +ch.value)
+        }
+
+        var s=document.querySelector("#sel")
+        s.onchange=function(){
+            console.log("the selected city is:"+s.value)
+        }
+
+        var checking=document.querySelector("chec")
+        if (checking.checked){
+            console.log("checked")
+        }
+        else{
+            console.log("unchecked")
+        }
+
     </script>
+
+
 
 
 </body>

@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Events Tasks</title>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background: rgb(214, 25, 173);
+        margin: 10px;
+        display: inline-block;
+        transition: 0.3s;
+    }
+
+    .dark-mode {
+        background: black !important;
+        color: white !important;
+    }
+
+    .done {
+        color: rgb(30, 223, 30);
+        text-decoration: line-through;
+    }
+
+    input:focus {
+        outline: 2px solid blue;
+    }
+</style>
+</head>
+<body>
+
+<h2>Task 1: Toggle Paragraph</h2>
+<button id="toggleBtn">Hide</button>
+<p id="myPara">This is a hidden paragraph test.</p>
+
+
+
+<h2>Task 2: Boxes Hover + Click</h2>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+
+
+
+<h2>Task 3: Focus + Change Validation</h2>
+<input type="text" placeholder="Input 1">
+<input type="text" placeholder="Input 2">
+<input type="text" placeholder="Input 3">
+<span id="msg"></span>
+
+
+
+<h2>Task 4: Form Validation</h2>
+<form id="myForm">
+    <input type="text" id="name" placeholder="Name"><br>
+    <input type="text" id="email" placeholder="Email"><br>
+    <input type="number" id="age" placeholder="Age"><br>
+    <button type="submit" id="submitBtn">Submit</button>
+</form>
+<div id="formMsg"></div>
+
+
+
+<h2>Task 5: Theme Switcher</h2>
+<label><input type="radio" name="theme" value="Light"> Light</label>
+<label><input type="radio" name="theme" value="Dark"> Dark</label>
+
+<div id="themeMsg"></div>
+
+
+
+<h2>Task 6: Interactive Task List</h2>
+<ul id="taskList">
+    <li>Task A</li>
+    <li>Task B</li>
+</ul>
+
+<input id="newTask" type="text" placeholder="New Task">
+<button id="addTaskBtn" disabled>Add Task</button>
+
+<script>
+
+// Task 1
+
+const btn = document.getElementById("toggleBtn");
+const para = document.getElementById("myPara");
+
+btn.onclick = function() {
+    if (para.style.display === "none") {
+        para.style.display = "block";
+        btn.textContent = "Hide";
+    } else {
+        para.style.display = "none";
+        btn.textContent = "Show again";
+    }
+};
+
+
+// Task 2
+
+const boxes = document.getElementsByClassName("box");
+
+for (let box of boxes) {
+    box.onmouseover = function () {
+        box.style.transform = "scale(1.2)";
+    };
+
+    box.onmouseout = function () {
+        box.style.transform = "scale(1)";
+    };
+
+    box.onclick = function () {
+        box.style.background = "orange";
+    };
+}
+
+
+
+// Task 3
+
+const inputs = document.getElementsByTagName("input");
+const msg = document.getElementById("msg");
+
+for (let input of inputs) {
+    let validated = false;
+
+    input.onfocus = function () {
+        input.style.background = "#e3f0ff";
+    };
+
+    input.onchange = function () {
+        if (validated) return;
+
+        if (input.value.trim().length < 3) {
+            msg.textContent = "Error: Minimum 3 characters!";
+            msg.style.color = "red";
+        } else {
+            msg.textContent = "Ok";
+            msg.style.color = "green";
+            validated = true;
+        }
+    };
+}
+
+
+
+// Task 4
+
+const form = document.querySelector("#myForm");
+const formInputs = document.querySelectorAll("#myForm input");
+const formMsg = document.getElementById("formMsg");
+const submitBtn = document.getElementById("submitBtn");
+
+form.onsubmit = function (e) {
+    e.preventDefault();
+
+    let name = formInputs[0].value.trim();
+    let email = formInputs[1].value.trim();
+    let age = formInputs[2].value.trim();
+
+    if (name.length < 2) {
+        formMsg.textContent = "Name must be at least 2 characters.";
+        return;
+    }
+    if (!email.includes("@")) {
+        formMsg.textContent = "Invalid email.";
+        return;
+    }
+    if (isNaN(age) || age <= 0) {
+        formMsg.textContent = "Age must be a number > 0.";
+        return;
+    }
+
+    formMsg.textContent = `Welcome, ${name}!`;
+    form.reset();
+    submitBtn.disabled = true;
+};
+
+
+
+// Task 5
+
+const radios = document.getElementsByName("theme");
+const themeMsg = document.querySelector("#themeMsg");
+
+for (let radio of radios) {
+    radio.onchange = function () {
+        themeMsg.textContent = "Current theme: " + radio.value;
+
+        if (radio.value === "Dark") {
+            document.body.classList.add("dark-mode");
+        } else {
+            document.body.classList.remove("dark-mode");
+        }
+    };
+}
+
+
+window.onbeforeunload = function () {
+    let chosen = [...radios].find(r => r.checked)?.value || "Light";
+    return `Do you really want to leave with ${chosen} mode?`;
+};
+
+// Task 6
+
+const taskList = document.getElementById("taskList");
+const newTask = document.getElementById("newTask");
+const addBtn = document.getElementById("addTaskBtn");
+
+function setTaskHandlers(li) {
+    li.onmouseover = () => li.style.textDecoration = "underline";
+    li.onmouseout = () => li.style.textDecoration = "none";
+
+    li.onclick = function () {
+        li.classList.add("done");
+        li.onclick = null; 
+    };
+}
+
+
+document.querySelectorAll("#taskList li").forEach(li => setTaskHandlers(li));
+
+addBtn.onclick = function () {
+    if (newTask.value.trim() === "") {
+        alert("Please enter a task");
+        return;
+    }
+
+    const li = document.createElement("li");
+    li.textContent = newTask.value;
+    taskList.appendChild(li);
+
+    setTaskHandlers(li);
+
+    newTask.value = "";
+    addBtn.disabled = true;
+};
+
+newTask.onchange = function () {
+    if (newTask.value.trim().length >= 3)
+        addBtn.disabled = false;
+    else
+        addBtn.disabled = true;
+};
+
+</script>
+</body>
+</html>

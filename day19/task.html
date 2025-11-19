@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events practice</title>
+    <style>
+        .box1{
+            width: 150px;
+            height:150px;
+            border:2px solid black;
+        }
+
+        .box2{
+            width: 100px;
+            height: 100px;
+            border:2px solid black
+        }
+
+        
+    </style>
+
+</head>
+<body onload="loading()">
+
+    <button id="b1" onclick="btn()">click</button><br> <br>
+
+    <div class="box1" onmouseover="cc()"></div><br>
+
+    <div class="box2" onmouseover="bx()" onmouseout="bx1()"></div> <br><br>
+
+    <input type="text" onfocus="ip()"><br><br>
+
+    <form onsubmit="cf()">
+        <input type="text" id="name" >
+        <button>submit</button>
+    </form> <br> <br>
+
+    <select id="sel">
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>JavaScript</option>
+    </select>
+
+
+
+    <script>
+            function btn(){
+              alert("Button clicked Successfully!")
+            }
+
+            function cc(){
+              var c=document.querySelector(".box1")
+              c.style.backgroundColor="green"
+            }
+             
+            function bx(){
+                var d=document.querySelector(".box2")
+                d.style.backgroundColor="red"
+            }
+            function bx1(){
+                var e=document.querySelector(".box2")
+                e.style.backgroundColor="blue"
+            }
+
+            function ip(){
+                var i=document.querySelector("input")
+                i.style.backgroundColor="yellow"
+            }
+
+            function cf(){
+                var n=document.getElementById("name").values
+                if(name===" "){
+                    alert("Name is required")
+                }
+                else{
+                    alert("form submitted Successfully")
+                }
+            }
+
+            function loading(){
+                alert('Welcome! Page Loaded Successfully')
+            }
+            
+            var s=document.querySelector("#sel")
+            s.onchange=function(){
+                alert("the selected cource is:"+ s.value)
+            }
+
+
+
+    </script>
+</body>
+</html>

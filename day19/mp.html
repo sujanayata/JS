@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Combined Events Project</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input, select, button {
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: rgb(97, 152, 171);
+      border: 1px solid black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+
+<body onload="welcomeMessage()">
+
+  <h2>Mini Form with Multiple Events</h2>
+
+
+  <form onsubmit="return validateForm()">
+    
+    <label>Enter your name:</label><br>
+ 
+    <input type="text" id="name" onfocus="changeColor(this)" onblur="resetColor(this)">
+    <br><br>
+
+
+    <label>Select a topic:</label><br>
+    <select id="topic" onchange="topicChanged()">
+      <option value="">--Choose--</option>
+      <option value="HTML">HTML</option>
+      <option value="CSS">CSS</option>
+      <option value="JavaScript">JavaScript</option>
+    </select>
+    <br><br>
+
+    
+    <button type="submit" 
+            onmouseover="hoverButton(this)" 
+            onmouseout="resetButton(this)">
+      Submit
+    </button>
+  </form>
+
+  <script>
+  
+    function welcomeMessage() {
+      alert("Welcome to the Mini Form!");
+    }
+
+    function changeColor(input) {
+      input.style.backgroundColor = "lightyellow";
+    }
+
+  
+    function resetColor(input) {
+      input.style.backgroundColor = "white";
+    }
+
+    
+    function hoverButton(btn) {
+      btn.style.backgroundColor = "lightgreen";
+    }
+
+   
+    function resetButton(btn) {
+      btn.style.backgroundColor = "lightblue";
+    }
+
+  
+    function topicChanged() {
+      var topic = document.getElementById("topic").value;
+      if (topic) {
+        alert("You selected: " + topic);
+      }
+    }
+
+    
+    function validateForm() {
+      var name = document.getElementById("name").value;
+      if (name === "") {
+        alert("Please enter your name!");
+        return false;  // prevent form from submitting
+      } else {
+        alert("Form submitted successfully!");
+        return true;
+      }
+    }
+  </script>
+
+</body>
+</html>

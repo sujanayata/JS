@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;
+            height: 100px;
+            border:2px solid;
+            background-color: rgb(214, 15, 224);
+            display: grid;
+        }
+        body {
+        font-family: Arial;
+        padding: 20px;
+        transition: 0.3s;
+        }
+        /* Dark mode class */
+        .dark-mode {
+        background-color:rgb(10, 9, 9);
+        color: white;
+        }
+        #themeMsg {
+        margin-top: 15px;
+        font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="btn" onclick="one()">click here</button>
+    <p id="para" > </p>
+
+    <div class="box" onmouseover="two()" onmouseout="two1()"></div><br><br>
+    <div class="box" onmouseover="two()" onmouseout="two1()" ></div> <br>
+  
+    <input type="text" onfocus="three()" id="one"> <br><br>
+    <input type="text" onfocus="three()" id="one"> <br><br>
+    <input type="text" onfocus="three()" id="one"><br> <br>
+   
+<form id="myForm">
+  <input type="text" id="name" placeholder="Enter name"> <br> <br>
+  <input type="email" id="email" placeholder="Enter email"><br> <br>
+  <input type="number" id="age" placeholder="Enter age"><br> <br>
+  <button type="submit" id="btn">Submit</button><br>
+</form>
+<div id="msg"></div>
+ 
+
+<label>
+  <input type="radio" name="theme" value="light" > Light
+</label>
+<br>
+<label>
+  <input type="radio" name="theme" value="Dark"> Dark
+</label>
+<div id="themeMsg"></div>
+
+<ul id="taskList">
+  <li>Task A</li>
+  <li>Task B</li>
+</ul>
+
+<input type="text" id="newTask" placeholder="Enter a new task">
+<button id="addTaskBtn" disabled>Add Task</button>
+
+    <script>
+        function one(){
+            var p=document.getElementById("btn")
+            var p1=document.getElementById("para")
+            p1.textContent="hello world"
+            if (p.style.display='block'){
+                p.innerText='Hide text'
+            }else{
+                p.style.display='none'
+                b.innerText='show again'
+            }
+        }
+
+        function two(){
+        var boxes = document.querySelectorAll(".box");
+        for (var i = 0; i < boxes.length; i++) {
+            boxes[i].style.transform = "scale(1.5)";
+        }
+         }
+        function two1(){
+        var boxes = document.querySelectorAll(".box");
+        for (var i = 0; i < boxes.length; i++) {
+            boxes[i].style.transform = "scale(1)";
+        }
+         }
+        
+         function three(){
+         var ip=document.getElementsByTagName("input")
+         for(var i=0;i<ip.length;i++){
+         ip[i].style.backgroundColor="green"
+         }
+         }
+
+         function ci(){
+            var i=document.getElementById("name")
+            var m=document.getElementById("msg")
+
+            if(input.value.lenght>=3){
+                m.innerHTML="ok"
+                m.style.color="orange"
+            }else{
+                m.innerHTML="please enter atleast 3 characters"
+                m.style.color="yellow"
+            }
+
+         }
+
+    // 4
+    const form = document.querySelector("#myForm");
+    const inputs = document.querySelectorAll("#myForm input");
+    const msg = document.querySelector("#msg");
+    const btn = document.querySelector("#btn");
+
+    form.onsubmit = function (event) {
+    event.preventDefault();   
+
+    let name = inputs[0].value.trim();
+    let email = inputs[1].value.trim();
+    let age = inputs[2].value.trim();
+    if (name.length < 2) {
+      msg.innerHTML = "Name must be at least 2 characters.";
+      msg.style.color = "red";
+      return;
+    }
+    if (!email.includes("@")) {
+      msg.innerHTML = "Email must contain '@'.";
+      msg.style.color = "red";
+      return;
+    }
+    if (isNaN(age) || age <= 0) {
+      msg.innerHTML = "Age must be a number greater than 0.";
+      msg.style.color = "red";
+      return;
+    }
+    msg.innerHTML = `Welcome, ${name}!`;
+    msg.style.color = "green";
+    inputs.forEach(input => input.value = "");
+    btn.disabled = true;
+  };
+ 
+// 5
+  const radios = document.getElementsByName("theme");
+  const themeMsg = document.querySelector("#themeMsg");
+  for (let i = 0; i < radios.length; i++) {
+    radios[i].onchange = function () {
+      const value = this.value;
+      themeMsg.innerHTML = "Current theme: " + value;
+      if (value === "Dark") {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+    };
+  }
+
+// 6
+
+  const taskList = document.getElementById("taskList");
+  const input = document.getElementById("newTask");
+  const addBtn = document.getElementById("addTaskBtn");
+  function attachHandlers(li) {
+    li.onmouseover = function () {
+      li.style.textDecoration = "underline";
+    };
+
+    
+    li.onmouseout = function () {
+      li.style.textDecoration = "none";
+    };
+
+    
+    li.onclick = function () {
+      li.classList.add("done");        
+      li.onclick = null;               
+    };
+  }
+
+
+  const allItems = document.querySelectorAll("#taskList li");
+  allItems.forEach(li => attachHandlers(li));
+
+
+  addBtn.onclick = function () {
+    const text = input.value.trim();
+
+    if (text === "") {
+      alert("Task cannot be empty!");
+      return;
+    }
+
+    
+    const newLi = document.createElement("li");
+    newLi.textContent = text;
+
+    
+    attachHandlers(newLi);
+
+ 
+    taskList.appendChild(newLi);
+    input.value = "";
+    addBtn.disabled = true;
+  };
+  input.onchange = input.onkeyup = function () {
+    if (input.value.trim().length >= 3) {
+      addBtn.disabled = false;
+    } else {
+      addBtn.disabled = true;
+    }
+  };
+
+    </script>
+    
+</body>
+</html>
