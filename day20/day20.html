@@ -13,9 +13,7 @@
     <!-- this keyword in function-> refers to windows object -->
     <!-- this keyword is only applicable for current object -->
      
-
     <script>
-
         /*const person={
               firstname:"dora",
               lastname:"bujji",
@@ -52,19 +50,25 @@
         }
         console.log(emp1.empdetails())
         document.getElementById('para').innerHTML=emp1.empdetails()
+
+        // call-->we can access the function of the one object into another object
+        // it will return the function immediately 
+
         console.log(emp1.empdetails.call(emp2,5000,"cooker"))
         console.log(emp1.empdetails(10000,"beer"))
         console.log(emp1.empdetails.call(emp3,500,"thumsup"))
 
-        //apply-->
-        
+        //apply-->it is similar to call method
+        // it will return the function immediately
+        // the parameters are will be passed in the form of an array
 
         console.log(emp1.empdetails.apply(emp3,[5000,"cooker"]))
         console.log(emp1.empdetails.apply(emp2,[5000,"cooker"]))
         console.log(emp1.empDetails.apply(emp3, [500, "maza"]))
 
 
-        bind
+        // bind()--> to bind two objects
+        // it will not execute immediately ratherthan it will return the function
         var res=emp1.empdetails.bind(emp2,5000,"cooker")
         console.log(res())
         console.log(setTimeout(res,3000))

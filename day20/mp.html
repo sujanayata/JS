@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game - Multi Players</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            font-size: 38px;
+            font-weight: bold;
+        }
+
+        .container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+            width: 280px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            margin-bottom: 5px;
+        }
+
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: white;
+            color: #2575fc;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #eaeaea;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Multi-Player Quiz Game</h1>
+
+    <div class="container">
+
+        <!-- Player 1 -->
+        <div class="card">
+            <h2>Player 1</h2>
+            <div class="score" id="p1-score">Score: 0</div>
+            <button id="p1-play">Play Now</button>
+            <button onclick="addDirectPoints(1)">Add Points (call)</button>
+            <button onclick="addMultiple(1)">Add Multiple (apply)</button>
+        </div>
+
+        <!-- Player 2 -->
+        <div class="card">
+            <h2>Player 2</h2>
+            <div class="score" id="p2-score">Score: 0</div>
+            <button id="p2-play">Play Now</button>
+            <button onclick="addDirectPoints(2)">Add Points (call)</button>
+            <button onclick="addMultiple(2)">Add Multiple (apply)</button>
+        </div>
+
+    </div>
+
+
+<script>
+
+    // Player Objects
+    const player1 = { name: "Player 1", score: 0 };
+    const player2 = { name: "Player 2", score: 0 };
+
+    // Common function for all players
+    function updateScore(points) {
+        this.score += points;
+        document.getElementById(this.name === "Player 1" ? "p1-score" : "p2-score").innerHTML =
+        `Score: ${this.score}`;
+    }
+
+    // CALL() — single point
+    function addDirectPoints(playerNum) {
+        if (playerNum === 1) updateScore.call(player1, 5);
+        else updateScore.call(player2, 5);
+    }
+
+    // APPLY() — multiple points
+    function addMultiple(playerNum) {
+        let bonus = [10]; // apply accepts array
+        if (playerNum === 1) updateScore.apply(player1, bonus);
+        else updateScore.apply(player2, bonus);
+    }
+
+    // BIND() — personal play button
+    const p1PlayBtn = document.getElementById("p1-play");
+    const p2PlayBtn = document.getElementById("p2-play");
+
+    const p1Play = updateScore.bind(player1, 3);
+    const p2Play = updateScore.bind(player2, 3);
+
+    p1PlayBtn.onclick = p1Play;
+    p2PlayBtn.onclick = p2Play;
+
+</script>
+
+</body>
+</html>
