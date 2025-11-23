@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Clock</title>
+</head>
+<body>
+
+<h2 id="clock"></h2>
+<button id="stopBtn">Stop Clock</button>
+
+<script>
+    // Function to show time
+    function showTime() {
+        let now = new Date();
+        let time = now.toLocaleTimeString();
+        document.getElementById("clock").innerText = time;
+    }
+
+    // Start the interval clock
+    let clockInterval = setInterval(showTime, 1000);
+
+    // Stop button
+    document.getElementById("stopBtn").addEventListener("click", function () {
+        clearInterval(clockInterval);
+        alert("Clock Stopped!");
+    });
+</script>
+
+</body>
+</html>

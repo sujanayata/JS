@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+<body>
+    <!--advance array methods (map(),filter(),reduce())-->
+    <!-- map():- it will traverse into each and every element in the array and then it will return new array -->
+     <!-- it will not effect the original array -->
+    <script>
+        let num=[1,2,3,4,5]
+        let num1=num.map((number)=>number*5)
+        console.log(num1)
+        console.log(num)
+    // filter()->it is used to display the value,which satisfies condition,it will not effect original array.
+        let num2=[8,13,16,35,45,100,120,420,7,6]
+        let resu=num2.filter((number1)=>number1>35)
+        console.log(resu)
+        console.log(num2)
+
+
+    // it will reduce the all the values in array into single value
+        let num3=[6,8,11,4,78,31,25]
+        let res1=num3.reduce((a,c)=>a+c,0+5)
+        console.log(res1)
+
+    // time functions ->setInterval(),setTimeout(),clearInterval(),clearTimeout()
+
+        // setTimeout(() => console.log("mumma dada love u"), 5000);
+
+        // setInterval(()=>cosole.log("dora"),2000)
+    
+    
+       const time=setTimeout(()=>{console.log("You will NOT see this message");
+        }, 3000);
+        // Cancel the timeout
+        clearTimeout(timer);
+
+    //Part 1 — Tasks on map()
+    // Task 1: Multiply Elements
+    let arr=[2,4,6,8] 
+    let res=arr.map((number)=>number*10) 
+    console.log(res)
+    
+    // Task 2: Extract Names
+    const data = [
+    { name: "Ram", age: 20 },
+    { name: "Sita", age: 22 }
+    ];
+    const names=data.map((item)=>item.name)
+    console.log(names)
+      
+    // Task 3: Square All Numbers
+    let arr2=[3,5,7,9]
+    let result=arr2.map((num)=>num**2)
+    console.log(result)
+
+    //Task 4: Filter Even Numbers
+    
+    let arr4=[1,2,4,5,6,7,8,9,10]
+    let result3=arr4.filter((n)=>n%2==0)
+    console.log(result3)
+  
+    // // Task 5: Students With Marks > 75
+    let arr3= [
+        {name: "Arun", marks: 80},
+        {name: "Ravi", marks: 60},
+        {name: "Kavi", marks: 90}
+        ]
+    let result1=arr3.filter((stu)=>stu.marks>75)
+    console.log(result1)
+  
+    // Task 6: Filter Strings with Length > 5
+    let arr5= ["apple", "cat", "banana", "dog", "elephant"]
+    let result4=arr5.filter(item=>item.length>5)
+    console.log(result4)
+
+    // Part 3 — Tasks on reduce()
+    // Task 7: Find Total Price
+    const prices = [150, 200, 350, 100];
+    let result5=prices.reduce((a,c)=>a+c)
+    console.log(result5)
+
+    // Task 8: Count Total Characters
+    var char= ["js", "react", "node"]
+    let words=char.reduce((acc,item)=>acc+item.length,0)
+    console.log(words)
+    
+    //Part 4 — Tasks on Timing Functions
+
+    //Task 9: Display “Hello World” after 3 seconds
+    
+    // setTimeout(() => {console.log("hello world")}, 2000);
+    // Task 10: Display Numbers 1 to 10 Every Second
+    var count=1;
+    var count1=setInterval(()=>{console.log("count:",count)
+                            count++
+                            if (count==5){
+                               clearInterval(count1)
+                            }
+                        },2000)
+    // Task 11: Stop a Timer Before It Runs                
+    // Start a timer of 5 seconds
+    let timer = setTimeout(() => {
+        console.log("Timer finished!");
+    }, 5000);
+
+    // Cancel the timer after 2 seconds
+    setTimeout(() => {
+        clearTimeout(timer);
+        console.log("Timer stopped before completion");
+    }, 2000);
+                      
+                            
+
+
+    </script>
+
+</body>
+</html>
