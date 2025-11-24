@@ -1,0 +1,361 @@
+<!--
+Doraemon made using only <div> elements + CSS + small JS interaction.
+Save this as `doraemon_div_only.html` and open in a browser.
+All shapes are created with divs, border-radius, transforms & box-shadows.
+Click the pocket to enter your favourite gadget — it will appear inside the pouch.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Doraemon — pure &lt;div&gt; CSS illustration</title>
+  <style>
+    :root{
+      --bg:#f2f7fb;
+      --dora-blue:#00a0df;
+      --white:#fff;
+      --red:#ef3b3b;
+      --yellow:#ffd24d;
+      --line:#222;
+      --shadow:rgba(0,0,0,0.12);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg,var(--bg),#e6f0fa);
+      font-family:Inter, system-ui, Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Stage */
+    .stage{
+      width:560px;
+      height:560px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    /* Doraemon wrapper */
+    .dora{
+      width:380px;
+      height:420px;
+      position:relative;
+      transform:translateY(6px);
+    }
+
+    /* Head (big blue circle) */
+    .head{
+      position:absolute;
+      left:50%;
+      top:20px;
+      transform:translateX(-50%);
+      width:360px;
+      height:360px;
+      background:var(--dora-blue);
+      border-radius:50%;
+      box-shadow:0 18px 30px var(--shadow), inset 0 -6px rgba(0,0,0,0.06);
+      z-index:1;
+    }
+
+    /* Face white area */
+    .face{
+      position:absolute;
+      left:50%;
+      top:80px;
+      transform:translateX(-50%);
+      width:300px;
+      height:260px;
+      background:var(--white);
+      border-radius:50% 50% 45% 45%/60% 60% 45% 45%;
+      z-index:2;
+      box-shadow:0 6px 12px rgba(0,0,0,0.06);
+    }
+
+    /* Eyes */
+    .eye{
+      position:absolute;
+      top:60px;
+      width:78px;
+      height:98px;
+      background:var(--white);
+      border-radius:50%;
+      border:4px solid var(--line);
+      overflow:hidden;
+    }
+    .eye.left{left:98px}
+    .eye.right{right:98px}
+
+    .pupil{
+      position:absolute;
+      bottom:18px;
+      left:50%;
+      transform:translateX(-50%);
+      width:20px;
+      height:26px;
+      background:var(--line);
+      border-radius:50%;
+    }
+    .pupil::after{
+      content:'';
+      position:absolute;
+      left:5px; top:4px;
+      width:6px; height:6px;
+      background:#fff; border-radius:50%;
+    }
+
+    /* Nose */
+    .nose{
+      position:absolute;
+      left:50%;
+      top:142px;
+      transform:translateX(-50%);
+      width:34px;
+      height:34px;
+      background:var(--red);
+      border-radius:50%;
+      border:4px solid var(--line);
+      z-index:4;
+      box-shadow:0 6px 10px rgba(0,0,0,0.06);
+    }
+
+    .nose-reflection{
+      position:absolute; width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.9);
+      left:8px; top:6px; z-index:5;
+    }
+
+    /* Mouth line */
+    .mouth{
+      position:absolute;
+      left:50%;
+      top:156px;
+      transform:translateX(-50%);
+      width:230px;
+      height:120px;
+      border-bottom:6px solid var(--line);
+      border-radius:0 0 50% 50%/0 0 60% 60%;
+      background:transparent;
+      z-index:3;
+    }
+
+    /* Tongue inside mouth */
+    .tongue{
+      position:absolute;
+      left:50%; top:210px; transform:translateX(-50%);
+      width:80px; height:44px; background:var(--red);
+      border-radius:0 0 50% 50%/0 0 100% 100%;
+      z-index:2; box-shadow: inset 0 -6px rgba(0,0,0,0.06);
+    }
+
+    /* Whiskers */
+    .whisker{
+      position:absolute;
+      width:120px; height:2px; background:var(--line);
+      top:170px; z-index:4;
+    }
+    .wh-left1{left:40px; transform:rotate(18deg)}
+    .wh-left2{left:24px; transform:rotate(0deg)}
+    .wh-left3{left:8px; transform:rotate(-18deg)}
+    .wh-right1{right:40px; transform:rotate(-18deg)}
+    .wh-right2{right:24px; transform:rotate(0deg)}
+    .wh-right3{right:8px; transform:rotate(18deg)}
+
+    /* Collar */
+    .collar{
+      position:absolute; left:50%; bottom:82px; transform:translateX(-50%);
+      width:320px; height:44px; background:var(--red); border-radius:22px; z-index:3;
+      box-shadow:0 6px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Bell */
+    .bell{
+      position:absolute; left:50%; bottom:62px; transform:translateX(-50%);
+      width:62px; height:62px; background:var(--yellow); border-radius:50%; z-index:5;
+      border:4px solid var(--line);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .bell::after{
+      content:''; position:absolute; bottom:12px; width:28px; height:6px; background:var(--line); border-radius:3px;
+    }
+    .bell-hole{position:absolute; bottom:18px; width:12px; height:12px; border-radius:50%; background:var(--line)}
+
+    /* Body */
+    .body{
+      position:absolute; left:50%; top:230px; transform:translateX(-50%);
+      width:300px; height:280px; background:var(--dora-blue); border-radius:36% 36% 18% 18%/ 28% 28% 10% 10%;
+      z-index:1; box-shadow:0 20px 30px rgba(0,0,0,0.06);
+    }
+
+    /* Belly white area */
+    .belly{
+      position:absolute; left:50%; top:48px; transform:translateX(-50%);
+      width:220px; height:210px; background:var(--white); border-radius:60% 60% 50% 50%/70% 70% 50% 50%; z-index:2;
+      border:4px solid rgba(0,0,0,0.05);
+    }
+
+    /* Pocket (clickable) */
+    .pocket{
+      position:absolute; left:50%; top:110px; transform:translateX(-50%);
+      width:120px; height:92px; background:var(--white);
+      border-radius:0 0 55% 55%/0 0 98% 98%; z-index:3; border:4px solid var(--line);
+      overflow:hidden; cursor:pointer;
+      display:flex; align-items:flex-end; justify-content:center;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .pocket:active{transform:translateX(-50%) scale(.98)}
+
+    /* Pocket inner shadow */
+    .pocket::before{
+      content:''; position:absolute; top:0; left:0; right:0; height:40px; background:linear-gradient(rgba(0,0,0,0.02), transparent);
+    }
+
+    /* Gadget placeholder */
+    .gadget{
+      margin-bottom:10px; font-weight:700; font-size:14px; color:#222; background:rgba(255,255,255,0.6);
+      padding:6px 10px; border-radius:8px; box-shadow:0 6px 10px rgba(0,0,0,0.06);
+      transform-origin:center bottom; transition:transform .18s ease;
+    }
+
+    /* Arms */
+    .arm{position:absolute; width:36px; height:120px; background:var(--dora-blue); border-radius:20px; top:250px; z-index:2; border:4px solid rgba(0,0,0,0.05)}
+    .arm.left{left:18px; transform:rotate(-18deg)}
+    .arm.right{right:18px; transform:rotate(18deg)}
+
+    /* Hands as white circles */
+    .hand{position:absolute; width:46px; height:46px; background:var(--white); border-radius:50%; bottom:18px; left:50%; transform:translateX(-50%); border:4px solid rgba(0,0,0,0.06)}
+
+    /* Feet */
+    .foot{position:absolute; width:86px; height:44px; background:var(--white); border-radius:40px; bottom:-12px; left:50%; transform:translateX(-50%); border:4px solid rgba(0,0,0,0.06)}
+    .foot.left{transform:translateX(-130%)}
+    .foot.right{transform:translateX(30%)}
+
+    /* Small details / cute cheeks */
+    .cheek{position:absolute; width:18px; height:8px; background:#ffd6d6; border-radius:8px; top:170px}
+    .cheek.left{left:58px}
+    .cheek.right{right:58px}
+
+    /* Playful hover */
+    .stage:hover .head{transform:translateY(-6px)}
+
+    /* Responsive tweak */
+    @media (max-width:520px){
+      .stage{width:90vw;height:90vw}
+      .dora{transform:scale(.85)}
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" role="img" aria-label="Doraemon illustration built with divs">
+    <div class="dora">
+
+      <div class="head"></div>
+      <div class="face"></div>
+
+      <!-- Eyes -->
+      <div class="eye left"><div class="pupil"></div></div>
+      <div class="eye right"><div class="pupil"></div></div>
+
+      <!-- Nose -->
+      <div class="nose"><div class="nose-reflection"></div></div>
+
+      <!-- Mouth and tongue -->
+      <div class="mouth"></div>
+      <div class="tongue"></div>
+
+      <!-- Whiskers -->
+      <div class="whisker wh-left1"></div>
+      <div class="whisker wh-left2"></div>
+      <div class="whisker wh-left3"></div>
+      <div class="whisker wh-right1"></div>
+      <div class="whisker wh-right2"></div>
+      <div class="whisker wh-right3"></div>
+
+      <!-- Collar & bell -->
+      <div class="collar"></div>
+      <div class="bell"><div class="bell-hole"></div></div>
+
+      <!-- Body and belly -->
+      <div class="body">
+        <div class="belly"></div>
+        <!-- Pocket is clickable -->
+        <div class="pocket" id="pocket" role="button" aria-label="Click pocket to add gadget">
+          <!-- gadget(s) will be injected here -->
+        </div>
+
+        <!-- arms & hands -->
+        <div class="arm left"><div class="hand" style="bottom: -8px"></div></div>
+        <div class="arm right"><div class="hand" style="bottom: -8px"></div></div>
+
+        <!-- feet -->
+        <div class="foot left"></div>
+        <div class="foot right"></div>
+      </div>
+
+      <!-- Cheeks -->
+      <div class="cheek left"></div>
+      <div class="cheek right"></div>
+
+    </div>
+  </div>
+
+  <script>
+    // Interaction: click pocket to prompt for favourite gadget and show inside pocket
+    (function(){
+      const pocket = document.getElementById('pocket');
+
+      // Utility to create gadget element
+      function createGadget(text){
+        const g = document.createElement('div');
+        g.className = 'gadget';
+        g.textContent = text;
+        return g;
+      }
+
+      // Animate small bounce when a gadget is added
+      function bounce(el){
+        el.style.transform = 'translateY(-6px)';
+        setTimeout(()=> el.style.transform = 'translateY(0)', 180);
+      }
+
+      // Click handler
+      pocket.addEventListener('click', function(){
+        const fav = prompt('Which gadget is your favourite? (e.g. Anywhere Door)');
+        if(!fav) return;
+
+        // Clear previous gadget text to keep one visible
+        // But keep a subtle reveal
+        pocket.innerHTML = '';
+        const gadget = createGadget(fav);
+        pocket.appendChild(gadget);
+
+        // tiny scale & bounce effect
+        gadget.style.transform = 'translateY(0)';
+        gadget.style.opacity = 0;
+        gadget.style.transition = 'opacity .22s ease, transform .22s ease';
+        requestAnimationFrame(()=>{
+          gadget.style.opacity = 1;
+          gadget.style.transform = 'translateY(-8px)';
+        });
+
+        setTimeout(()=> bounce(gadget), 280);
+      });
+
+      // Accessibility: Enter/Space to activate
+      pocket.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault(); pocket.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

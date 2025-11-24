@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce Mini Site</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header>
+        <h1>Mini E-Commerce</h1>
+        <div class="cart-icon" onclick="openCart()">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="products">
+        <div class="product">
+            <img src="smart watch.webp" alt="">
+            <h3>Smart Watch</h3>
+            <p>₹1,299</p>
+            <button onclick="addToCart('Smart Watch',1299)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="wireless earbuds.webp" alt="">
+            <h3>Wireless Earbuds</h3>
+            <p>₹999</p>
+            <button onclick="addToCart('Earbuds',999)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="backpack.jpeg" alt="">
+            <h3>Backpack</h3>
+            <p>₹799</p>
+            <button onclick="addToCart('Backpack',799)">Add to Cart</button>
+        </div>
+    </section>
+
+ 
+    <div id="cart-box" class="cart-box">
+        <h2>Your Cart</h2>
+        <ul id="cart-list"></ul>
+        <h3>Total: ₹<span id="total">0</span></h3>
+        <button class="close-btn" onclick="closeCart()">Close</button>
+    </div>
+
+     <script src="script.js"></script>
+</body>
+</html>
