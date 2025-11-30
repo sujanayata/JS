@@ -84,9 +84,18 @@
 // }
 
 //7. Find sum of first N natural numbers
-let n=5
-sum=0
-for(let i=1;i<=n;i++){
-    sum+=i
+// let n=5
+// sum=0
+// for(let i=1;i<=n;i++){
+//     sum+=i
+// }
+// console.log(sum)
+
+let a=0
+let b=1
+for(let i=2;i<=5;i++){
+    let temp=a+b
+    let a=b
+    let b=temp
+    console.log(temp)
 }
-console.log(sum)

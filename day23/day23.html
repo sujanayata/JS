@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promises</title>
+</head>
+<body>
+    <script>
+        // promises
+        // let exammarks=new Promise((resolve,reject)=>{
+        //    let marks=35
+        //    if (marks>=35){
+        //         resolve("pass")
+        //    }
+        //    else{
+        //         reject("not cleared yet,on the way")
+        //    }
+
+        // })
+        // exammarks.then((msg)=>{
+        //     console.log(msg)
+        // })
+        // .catch((err)=>{
+        //     console.log(err)
+        // })
+
+
+    // async--await
+
+    async function fectchdata(){
+        let response=await fetch('https://fakestoreapi.com/products')
+        let result=await response.json()
+        console.log(result)
+    }
+    fectchdata()
+
+
+
+
+    </script> 
+    
+</body>
+</html>
