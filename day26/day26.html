@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+           body {
+            background: linear-gradient(to right,pink, rgb(111, 158, 214)); 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .error-message{
+            color: red;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        form {
+            width: 300px;
+            background: rgb(138, 201, 214);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px black;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<form onsubmit="return formvalidation()">
+
+    <label>Name: </label>
+    <input type="text" id="name"><br>
+    <span id="name-error" class="error-message"></span><br>
+
+    <label>Password: </label>
+    <input type="password" id="password"><br>
+    <span id="password-error" class="error-message"></span><br>
+
+    <label>Email: </label>
+    <input type="email" id="email"><br>
+    <span id="email-error" class="error-message"></span><br>
+
+    <label>college</label>
+    <textarea id="college"></textarea><br><br>
+
+
+    <label>Course:</label>
+    <select id="course">
+        <option value="">====select option====</option>
+        <option>java full stack</option>
+        <option>python full stack</option>
+        <option>data science</option>
+        <option>mern stack</option>
+        <option>java script</option>
+        <option>automation</option>
+    </select><br>
+    <span id="course-error" class="error-message"></span><br>
+
+    <div>
+        <input type="checkbox" id="agree">
+        <label>I agree</label>
+    </div>
+    <span id="checkbox-error" class="error-message"></span><br>
+
+    <input type="submit" value="submit"><br><br>
+    <input type="reset" value="Reset">
+
+</form>
+
+<script>
+function formvalidation() {
+    const name = document.getElementById("name").value;
+    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const course = document.getElementById("course").value;
+    const agree = document.getElementById("agree").checked;
+
+    const nameerror = document.getElementById("name-error");
+    const passworderror = document.getElementById("password-error");
+    const emailerror = document.getElementById("email-error");
+    const courseerror = document.getElementById("course-error");
+    const checkboxerror = document.getElementById("checkbox-error");
+
+    // Clear old errors
+    nameerror.textContent = "";
+    passworderror.textContent = "";
+    emailerror.textContent = "";
+    courseerror.textContent = "";
+    checkboxerror.textContent = "";
+
+    let isValid = true;
+
+    if (name === "") {
+        nameerror.textContent = "Username not filled";
+        isValid = false;
+    }
+
+    if (password === "" || password.length < 6) {
+        passworderror.textContent = "Password must be more than 6 characters";
+        isValid = false;
+    }
+
+    if (email === "" || !email.includes('@')) {
+        emailerror.textContent = "Email is not valid";
+        isValid = false;
+    }
+
+    if (course === "") {
+        courseerror.textContent = "Please select a course";
+        isValid = false;
+    }
+
+    if (!agree) {
+        checkboxerror.textContent = "Please accept the terms and conditions";
+        isValid = false;
+    }
+
+    return isValid;
+}
+</script>
+
+</body>
+</html>
+

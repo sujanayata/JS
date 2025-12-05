@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Form</title>
+
+    <style>
+        /* Background */
+        body {
+            background: linear-gradient(135deg, #51c2e1, #5f99da, #de59b3, #fcb69f);
+            background-size: 400% 400%;
+            animation: bgAnimation 10s infinite alternate;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: left; }
+            100% { background-position: right; }
+        }
+
+        /* Form Card */
+        form {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 30px;
+            border-radius: 18px;
+            /* backdrop-filter: blur(10px); */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Labels */
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Inputs */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.7);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        /* Glow on focus */
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 8px #ff8ba7;
+            background: #fff;
+        }
+
+        /* Error message */
+        .error-message {
+            color: rgb(255, 50, 50);
+            font-size: 12px;
+            display: block;
+            height: 14px;
+            margin-top: -10px;
+            margin-bottom: 8px;
+        }
+
+        /* Buttons */
+        input[type="submit"],
+        input[type="reset"] {
+            background: linear-gradient(to right, #528ed2, #7074e7);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(255, 119, 173, 0.8);
+        }
+
+        /* Checkbox section */
+        #agree {
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            margin-left: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+
+</head>
+<body>
+
+<form onsubmit="return formvalidation()">
+
+    <label>Name:</label>
+    <input type="text" id="name">
+    <span id="name-error" class="error-message"></span>
+
+    <label>Password:</label>
+    <input type="password" id="password">
+    <span id="password-error" class="error-message"></span>
+
+    <label>Email:</label>
+    <input type="email" id="email">
+    <span id="email-error" class="error-message"></span>
+
+    <label>college</label>
+    <textarea id="college"></textarea><br><br>
+
+    <label>Course:</label>
+    <select id="course">
+        <option value="">====select option====</option>
+        <option>java full stack</option>
+        <option>python full stack</option>
+        <option>data science</option>
+        <option>mern stack</option>
+        <option>java script</option>
+        <option>automation</option>
+    </select>
+    <span id="course-error" class="error-message"></span>
+
+    <div>
+        <input type="checkbox" id="agree">
+        <label class="checkbox-label">I agree</label>
+    </div>
+    <span id="checkbox-error" class="error-message"></span>
+
+    <input type="submit" value="Submit"><br><br>
+    <input type="reset" value="Reset">
+
+</form>
+
+<script>
+function formvalidation() {
+    const name = document.getElementById("name").value;
+    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const course = document.getElementById("course").value;
+    const agree = document.getElementById("agree").checked;
+
+    const nameerror = document.getElementById("name-error");
+    const passworderror = document.getElementById("password-error");
+    const emailerror = document.getElementById("email-error");
+    const courseerror = document.getElementById("course-error");
+    const checkboxerror = document.getElementById("checkbox-error");
+
+    // Clear old errors
+    nameerror.textContent = "";
+    passworderror.textContent = "";
+    emailerror.textContent = "";
+    courseerror.textContent = "";
+    checkboxerror.textContent = "";
+
+    let isValid = true;
+
+    if (name.trim() === "") {
+        nameerror.textContent = "Username not filled";
+        isValid = false;
+    }
+
+    if (password.trim() === "" || password.length < 6) {
+        passworderror.textContent = "Password must be more than 6 characters";
+        isValid = false;
+    }
+
+    if (email.trim() === "" || !email.includes('@')) {
+        emailerror.textContent = "Email is not valid";
+        isValid = false;
+    }
+
+    if (course === "") {
+        courseerror.textContent = "Please select a course";
+        isValid = false;
+    }
+
+    if (!agree) {
+        checkboxerror.textContent = "Please accept the terms";
+        isValid = false;
+    }
+
+    return isValid;
+}
+</script>
+
+</body>
+</html>

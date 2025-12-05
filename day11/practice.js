@@ -91,11 +91,13 @@
 // }
 // console.log(sum)
 
-let a=0
-let b=1
-for(let i=2;i<=5;i++){
-    let temp=a+b
-    let a=b
-    let b=temp
-    console.log(temp)
-}
+// let a=0
+// let b=1
+// for(let i=2;i<=5;i++){
+//     let temp=a+b
+//     let a=b
+//     let b=temp
+//     console.log(temp)
+// }
+
+

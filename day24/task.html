@@ -7,32 +7,32 @@
 </head>
 <body>
     <script>
-function selectFood(callback){
+/*function selectFood(callback){
     setTimeout(()=>{
         console.log("Food selected");
         callback();  
-    },1000);
+    },2000);
 }
 
 function prepareFood(callback){
     setTimeout(()=>{
         console.log("Food prepared");
         callback();
-    },1000);
+    },2000);
 }
 
 function foodpacked(callback){
     setTimeout(()=>{
         console.log("Food packed");
         callback();
-    },1000);
+    },2000);
 }
 
 function deliverfood(callback){
     setTimeout(()=>{
         console.log("Food delivered");
         callback();
-    },1000);
+    },2000);
 }
 
 selectFood(()=>{
@@ -44,6 +44,57 @@ selectFood(()=>{
         });
     });
 });
+ */
+
+
+
+function selectFood() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            console.log("Food selected");
+            resolve();
+        }, 1000);
+    });
+}
+
+    function prepareFood() {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                console.log("Food prepared");
+                resolve();
+            }, 1000);
+        });
+    }
+
+    function packFood() {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                console.log("Food packed");
+                resolve();
+            }, 1000);
+        });
+    }
+
+    function deliverFood() {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                console.log("Food delivered");
+                resolve();
+            }, 1000);
+        });
+    }
+
+    async function processOrder() {
+        await selectFood();
+        await prepareFood();
+        await packFood();
+        await deliverFood();
+        console.log("Order Completed");
+    }
+
+    processOrder();
+
+
 </script>
 
 </body>

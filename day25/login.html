@@ -1,0 +1,147 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+
+    <style>
+        /* 🌈 Animated Gradient Background */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, pink, #72d2e5, #e75dd3);
+            background-size: 300% 300%;
+            animation: bgAnimation 10s ease infinite;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 🌟 Form Card */
+        .container {
+            width: 330px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Inputs */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px #ffffff;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #f1f1f1;
+            transform: scale(1.03);
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .error {
+            color: yellow;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 style="color: rgb(11, 6, 108);">Login</h2>
+
+        <div id="error-msg" class="error"></div>
+
+        <form onsubmit="return validateForm()">
+            <input type="text" id="username" placeholder="Username">
+
+            <input type="password" id="password" placeholder="Password">
+
+            <input type="password" id="cpassword" placeholder="Confirm Password">
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+
+<script>
+function validateForm() {
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let cpassword = document.getElementById("cpassword").value.trim();
+    let error = document.getElementById("error-msg");
+
+    // Clear error
+    error.innerHTML = "";
+
+    if (username === "") {
+        error.innerHTML = "⚠ Please enter username";
+        return false;
+    }
+
+    if (password === "") {
+        error.innerHTML = "⚠ Please enter password";
+        return false;
+    }
+
+    if (cpassword === "") {
+        error.innerHTML = "⚠ Please confirm your password";
+        return false;
+    }
+
+    if (password !== cpassword) {
+        error.innerHTML = "⚠ Passwords do not match!";
+        return false;
+    }
+
+    alert("Login Successful!");
+    return true;
+}
+</script>
+
+</body>
+</html>

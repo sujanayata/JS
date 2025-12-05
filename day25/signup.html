@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+
+    <style>
+       
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg,purple, pink, aqua);
+            background-size: 300% 300%;
+            animation: bg 12s ease infinite;
+            font-family: Arial;
+        }
+
+        @keyframes bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+       
+        .box {
+            width: 350px;
+            padding: 25px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 18px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fade 1s ease;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: white;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #f1f1f1;
+        }
+
+        .error {
+            color: yellow;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+       
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s ease;
+        }
+
+        .popup.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-box {
+            background: white;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            border-radius: 15px;
+            transform: scale(0.5);
+            transition: 0.3s ease;
+        }
+
+        .popup.active .popup-box {
+            transform: scale(1);
+        }
+
+        .login-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .login-link a {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="box">
+    <h2>Sign Up</h2>
+
+    <div id="error" class="error"></div>
+
+    <form onsubmit="return signupValidate()">
+        <input type="text" id="username" placeholder="Username">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <input type="password" id="cpassword" placeholder="Confirm Password">
+        <button type="submit">Create Account</button>
+    </form>
+
+    <div class="login-link">
+        Already have an account? <a href="login.html">Login</a>
+    </div>
+</div>
+
+
+<div class="popup" id="successPopup">
+    <div class="popup-box">
+        <h3>🎉 Account Created!</h3>
+        <p>Your account has been successfully created.</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</div>
+
+<script>
+function signupValidate() {
+    let user = document.getElementById("username").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let cpass = document.getElementById("cpassword").value.trim();
+    let err = document.getElementById("error");
+
+    err.innerHTML = "";
+
+    if (user === "") {
+        err.innerHTML = "⚠ Please enter username";
+        return false;
+    }
+    if (email === "") {
+        err.innerHTML = "⚠ Please enter email";
+        return false;
+    }
+    if (pass === "") {
+        err.innerHTML = "⚠ Please enter password";
+        return false;
+    }
+    if (cpass === "") {
+        err.innerHTML = "⚠ Please confirm your password";
+        return false;
+    }
+    if (pass !== cpass) {
+        err.innerHTML = "⚠ Passwords do not match!";
+        return false;
+    }
+
+    // Show popup
+    document.getElementById("successPopup").classList.add("active");
+    return false; // prevent form from reloading
+}
+
+function closePopup() {
+    document.getElementById("successPopup").classList.remove("active");
+}
+</script>
+
+</body>
+</html>
