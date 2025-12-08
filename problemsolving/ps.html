@@ -7,7 +7,41 @@
 </head>
 <body>
     <script>
-       console.log(typeof undefined);
+        //reversing a string
+      function reversestring(str){
+        let result="";
+        for(let  i=str.length-1; i>=0; i--){
+            result+=str[i]
+
+        }
+        return result;
+
+      }
+      console.log(reversestring("hello"))
+
+      //sum of numbers in array
+
+      function arraysum(arr){
+        let sum=0;
+        for(let i=0; i<arr.length; i++){
+            sum+=arr[i]
+        }
+        return sum
+      }
+      console.log(arraysum([1,2,3,4]));
+
+     //largest number in array
+     function largest(arr){
+        let max=arr[0];
+        for(let i=0; i<arr.length;i++){
+            if (arr[i]>max){
+                max=arr[i]
+            }
+        }
+        return max
+     }
+     console.log(largest([10,5,22,3]))
+
 
     </script>
 </body>

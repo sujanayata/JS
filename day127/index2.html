@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Style CRUD App</title>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #080808, #c40e87);
+        margin: 0;
+        padding: 30px;
+    }
+
+    .container {
+        max-width: 950px;
+        margin: auto;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        color: white;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 33px;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    form input, form select {
+        width: 31%;
+        padding: 12px;
+        margin: 10px 1%;
+        border-radius: 10px;
+        border: none;
+        font-size: 15px;
+        outline: none;
+        background: rgba(255,255,255,0.3);
+        color: white;
+        transition: 0.3s;
+    }
+
+    form input::placeholder {
+        color: #f0f0f0;
+    }
+
+    form input:focus, form select:focus {
+        background: rgba(255,255,255,0.5);
+        transform: scale(1.03);
+    }
+
+    .error {
+        border: 2px solid #ff4d4d;
+        background: rgba(255, 0, 0, 0.2);
+    }
+
+    .error-message {
+        color: #ffbdbd;
+        margin-left: 12px;
+        font-size: 13px;
+        margin-top: -8px;
+        margin-bottom: 8px;
+    }
+
+    button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        margin-top: 15px;
+        cursor: pointer;
+        background: linear-gradient(120deg, #00c6ff, #0072ff);
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 35px;
+        color: #fff;
+    }
+
+    th {
+        padding: 14px;
+        background: rgba(0,0,0,0.3);
+        border-radius: 10px;
+        letter-spacing: 1px;
+        font-size: 17px;
+    }
+
+    td {
+        padding: 12px;
+        text-align: center;
+        background: rgba(255,255,255,0.1);
+        margin: 5px;
+        border-radius: 10px;
+        backdrop-filter: blur(6px);
+        animation: fadeRow 0.5s ease-in-out;
+    }
+
+    @keyframes fadeRow {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-delete {
+        background: #ff4d4d;
+        padding: 8px 15px;
+        border-radius: 8px;
+    }
+
+    .btn-edit {
+        background: #00e676;
+        padding: 8px 15px;
+        border-radius: 8px;
+    }
+
+    .btn-delete:hover { background: #ff7b7b; transform: scale(1.1); }
+    .btn-edit:hover { background: #4dff9d; transform: scale(1.1); }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <form>
+
+        <input type="text" id="name" placeholder="Full Name">
+        <p class="error-message" id="err-name"></p>
+
+        <input type="email" id="email" placeholder="Email Address">
+        <p class="error-message" id="err-email"></p>
+
+        <input type="text" id="phone" placeholder="Phone Number">
+        <p class="error-message" id="err-phone"></p>
+
+        <select id="location">
+            <option value="">Select Location</option>
+            <option>Hyderabad</option>
+            <option>Bangalore</option>
+            <option>Chennai</option>
+            <option>Mumbai</option>
+        </select>
+        <p class="error-message" id="err-location"></p>
+
+        <input type="date" id="dob">
+        <p class="error-message" id="err-dob"></p>
+
+        <select id="skills">
+            <option value="">Select Skill</option>
+            <option>JavaScript</option>
+            <option>Python</option>
+            <option>React</option>
+            <option>Django</option>
+        </select>
+        <p class="error-message" id="err-skills"></p>
+
+        <button type="button" onclick="createData()">Save</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Location</th>
+                <th>DOB</th>
+                <th>Skill</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</div>
+
+<script>
+
+let data = [];
+let editIndex = -1;
+
+function validateForm(name, email, phone, location, dob, skills) {
+    let isValid = true;
+
+    document.querySelectorAll(".error-message").forEach(e => e.innerHTML = "");
+    document.querySelectorAll("input, select").forEach(e => e.classList.remove("error"));
+
+    if (name.trim() === "") {
+        document.getElementById("err-name").innerHTML = "Name is required";
+        document.getElementById("name").classList.add("error");
+        isValid = false;
+    }
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        document.getElementById("err-email").innerHTML = "Enter a valid email";
+        document.getElementById("email").classList.add("error");
+        isValid = false;
+    }
+
+    let phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        document.getElementById("err-phone").innerHTML = "Phone must be 10 digits";
+        document.getElementById("phone").classList.add("error");
+        isValid = false;
+    }
+
+    if (location === "") {
+        document.getElementById("err-location").innerHTML = "Select a location";
+        document.getElementById("location").classList.add("error");
+        isValid = false;
+    }
+
+    if (dob === "") {
+        document.getElementById("err-dob").innerHTML = "Select date of birth";
+        document.getElementById("dob").classList.add("error");
+        isValid = false;
+    }
+
+    if (skills === "") {
+        document.getElementById("err-skills").innerHTML = "Select a skill";
+        document.getElementById("skills").classList.add("error");
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function createData() {
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+    let phone = document.getElementById('phone').value;
+    let location = document.getElementById('location').value;
+    let dob = document.getElementById('dob').value;
+    let skills = document.getElementById('skills').value;
+
+    if (!validateForm(name, email, phone, location, dob, skills)) return;
+
+    if (editIndex === -1) {
+        data.push({ name, email, phone, location, dob, skills });
+    } else {
+        data[editIndex] = { name, email, phone, location, dob, skills };
+        editIndex = -1;
+    }
+
+    document.querySelector("form").reset();
+    Displaydata();
+}
+
+function Displaydata() {
+    let table = "";
+    data.forEach((item, index) => {
+        table += `
+        <tr>
+           <td>${item.name}</td>
+           <td>${item.email}</td>
+           <td>${item.phone}</td>
+           <td>${item.location}</td>
+           <td>${item.dob}</td>
+           <td>${item.skills}</td>
+           <td><button class="btn-edit" onclick="editbutton(${index})">Edit</button></td>
+           <td><button class="btn-delete" onclick="deletebutton(${index})">Delete</button></td>
+        </tr>`;
+    });
+    document.getElementById('tbody').innerHTML = table;
+}
+
+function deletebutton(i) {
+    data.splice(i, 1);
+    Displaydata();
+}
+
+function editbutton(i) {
+    let d = data[i];
+
+    document.getElementById('name').value = d.name;
+    document.getElementById('email').value = d.email;
+    document.getElementById('phone').value = d.phone;
+    document.getElementById('location').value = d.location;
+    document.getElementById('dob').value = d.dob;
+    document.getElementById('skills').value = d.skills;
+
+    editIndex = i;
+}
+
+</script>
+</body>
+</html>
